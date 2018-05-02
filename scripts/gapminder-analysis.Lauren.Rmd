@@ -1,0 +1,119 @@
+---
+title: "gapminder-analysis"
+author: "Evelyn Taylor-Cox"
+date: ''
+output:
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    highlight: zenburn
+---
+
+normal text
+*italic text*
+**bold text**
+***bold italic text***
+
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+
+### unordered lists
+- first item in the list
+- second item in the list
+- third item in the list
+
+### ordered lists
+1. first item in the list
+1. second item in the list
+1. third item in the list
+
+> this text will be quoted
+
+`this text will appear as code` inline
+
+
+## evaluate r code inline
+```{r variable, include= FALSE}
+a <- 10
+```
+
+
+the value of parameter *a* is `variable a
+## Images
+Provide either a path to a local image file or the URL of an image.
+
+![](https://upload.wikimedia.org/wikipedia/commons/0/08/2010-04-28_%2835%29_Erdhummel%2C_Buff-tailed_bumblebee%2C_Bombus_terrestris.jpg)
+
+### Resize Images
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/08/2010-04-28_%2835%29_Erdhummel%2C_Buff-tailed_bumblebee%2C_Bombus_terrestris.jpg" width="200px" />
+
+
+```{r chunk-name}
+print('hello world!')
+```
+
+# Installation
+
+Install 'gapminder' from CRAN:
+
+```{r, eval=F}
+install.packages("gapminder")
+```
+
+Or you can install 'gapminder' from Github:
+
+```{r,eval=FALSE}
+devtools::install_github("jennybc/gapminder")
+
+```
+
+Load and test
+
+```{r}
+library("gapminder")
+
+aggregate(lifeExp ~ continent, gapminder, median)
+#>   continent lifeExp
+#> 1    Africa 47.7920
+#> 2  Americas 67.0480
+#> 3      Asia 61.7915
+#> 4    Europe 72.2410
+#> 5   Oceania 73.6650
+
+library("dplyr")
+gapminder %>%
+    filter(year == 2007) %>%
+    group_by(continent) %>%
+    summarise(lifeExp = median(lifeExp))
+#> # A tibble: 5 x 2
+#>   continent lifeExp
+#>      <fctr>   <dbl>
+#> 1    Africa 52.9265
+#> 2  Americas 72.8990
+#> 3      Asia 72.3960
+#> 4    Europe 78.6085
+#> 5   Oceania 80.7195
+    
+library("ggplot2")
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_boxplot(outlier.colour = "hotpink") +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
+```
+
+#Displaying interactive DT::datatable() tables
+
+```{r}
+library(DT)
+data(airquality)
+datatable(airquality, caption = "New York Air Quality Measurements")
+```
+
+
+
+
+

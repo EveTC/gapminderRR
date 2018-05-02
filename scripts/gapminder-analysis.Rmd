@@ -1,0 +1,102 @@
+---
+title: "gapminder-analysis"
+author: "Evelyn Taylor-Cox"
+date: ''
+output:
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+Set global chunk settings
+```{r global}
+knitr::opts_chunk$set(warning = F, message = F)
+```
+
+
+
+normal text
+*italic text*
+**bold text**
+***bold italic text***
+
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+
+### unordered lists
+- first item in the list
+- second item in the list
+- third item in the list
+
+### ordered lists
+1. first item in the list
+1. second item in the list
+1. third item in the list
+
+> this text will be quoted
+
+`this text will appear as code` inline
+
+
+## evaluate r code inline
+```{r variable, echo= FALSE}
+a <- 10
+```
+
+
+the value of parameter *a* is `r a`
+
+## Images
+Provide either a path to a local image file or the URL of an image
+![](../assets/butterfly.jpg)
+
+Control the size of the picture
+
+<img src="../assets/butterfly.jpg" width="200px" />
+
+
+# Installation
+
+Install required packages:
+```{r installation, eval=FALSE}
+install.packages("devtools","gapminder", "here", "tidyverse")
+```
+
+Load Libraries
+```{r}
+library("dplyr")
+library("ggplot2")
+```
+
+
+Write to csv
+```{r csv}
+readr::write_csv(gapminder::gapminder, path = here::here("data/raw/gapminder.csv"))
+```
+
+Read in gapminder csv as a dataframe
+```{r df}
+gap_df <- readr::read_csv(here::here("data/raw/gapminder.csv"))
+```
+
+
+# Plots
+```{r plots}
+ggplot(gapminder::gapminder, aes(x=continent, y = lifeExp)) + geom_boxplot(outlier.colour = "hotpink") +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = 1/4)
+p <- gapminder::gapminder %>% ggplot(aes(x = gdpPercap, y = lifeExp, color = continent)) + 
+    geom_point()
+p
+
+```
+
+
+
+
+
+
