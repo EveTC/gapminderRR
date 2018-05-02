@@ -2,7 +2,7 @@
 
 The goal of gapminderRR is to ...
 
-## Installation
+## Installation yay
 
 ``` r
 install.packages("gapminderRR")
