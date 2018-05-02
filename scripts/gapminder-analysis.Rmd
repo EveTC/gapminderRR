@@ -7,6 +7,7 @@ output:
     toc: true
     toc_float: true
     theme: cosmo
+    highlight: zenburn
 ---
 
 Set global chunk settings
